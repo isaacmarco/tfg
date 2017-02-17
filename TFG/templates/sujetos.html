@@ -1,0 +1,59 @@
+﻿
+
+<html>
+
+<head>
+
+
+
+	<link rel="stylesheet" type="text/css" href="/interfaz.css">
+
+
+<script>
+	function myFunction(){
+		var lista = ["zero"];			
+		{% for sujeto in sujetos %}
+			lista.push( "{{ sujeto.nombre_sujeto }}" );	
+		{% endfor %}				
+	}
+</script>
+</head>
+
+<body>
+
+
+<div class="form-style-1">
+	<h1>Interfaz del evaluador</h1>
+</div>
+
+
+<div class="form-style-1">
+<!--
+	<button onclick="myFunction()">Click me</button>	
+-->	
+	<h2>Su lista de sujetos</h2>
+	<p>Está realizando el seguimiento de los siguientes sujetos. Para 
+	obtener el informe de rendimiento de un sujeto pulse en el enlace
+	correspondiete.</p>
+	<form action="http://127.0.0.1:8000/interfaz/">
+		<input type="submit" value="Volver" />
+	</form>
+	
+	<ul class="form-style-1">
+		<br>
+		{% for sujeto in sujetos %}
+			<li>{{ sujeto.nombre_sujeto }}</li>			
+			<form action="http://127.0.0.1:8000/listar-resultados/?id={{sujeto.id_sujeto | safe}}" method="POST">
+				{% csrf_token %}
+				<input type="submit" value="Informe" />
+			</form>
+			<hr>
+		{% endfor %}	
+	</ul>
+
+</div>
+
+
+	
+</body>
+</html>

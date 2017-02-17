@@ -1,0 +1,58 @@
+﻿{% extends "admin/base_site.html" %}
+{% block extrahead %}{{ block.super }}
+<script src="{{ jsi18nurl|default:" type="text/javascript"><!--mce:0--></script>  
+{% endblock %}
+{% block extrastyle %}{{ block.super }}
+{% endblock %}
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">       
+<!-- barra de navegacion -->
+Listado de sujetos
+<!--
+     <a href="../../../">{{ opts.app_label|capfirst|escape }}</a> ›
+     <a href="../../">{{ opts.verbose_name_plural|capfirst }}</a> ›
+     <a href="../">{{ opts.verbose_name|capfirst }} #{{ entry.pk }}</a> ›
+-->	
+</div>
+
+<a href="/admin/tfgapp/">Volver</a>
+<hr>
+<br>
+
+<table>
+<tbody>
+
+	
+	{% for resultado in resultados %}
+		<tr><td>		
+		<a href="/admin/tfgapp/resultado/8/">{{ resultado.sujeto }}</a>
+		</td></tr>
+	{% endfor %}
+
+</tbody>
+</table>
+
+{% endif %}{% endblock %}
+{% block content %}
+
+<form action="." method="post">  
+<!--
+<fieldset class="module aligned">  
+	<div class="form-row">  
+		<label>Entry</label>
+		<textarea style="height: 136px; width: 161px; margin: 2px;" rows="10">
+		{{ entry.body }}
+		</textarea>
+	</div>
+</fieldset>
+-->
+ 
+	 
+<!--
+<div class="submit-row">  
+<input class="default" type="submit" value="boton" /></div>  
+</form>
+-->
+
+{% endblock %}

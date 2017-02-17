@@ -1,0 +1,44 @@
+﻿<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/interfaz.css">
+</head>
+
+<body>
+
+
+<div class="form-style-1">
+	<h1>Interfaz del evaluador</h1>
+</div>
+
+
+
+<div class="form-style-1">
+<!--
+	<button onclick="myFunction()">Click me</button>	
+-->	
+	<h2>Informe de rendimiento del sujeto</h2>
+	<p>El siguiente informe muestra el rendimiento del sujeto
+	a través de las diferentes sesiones, ya sean de evaluación
+	o de tratamiento. <b>(TO-DO: Aquí mostramos el gráfico de progreso
+	del sujeto. Por ahora solo listamos los registros de resultados de ese
+	sujeto)</b>
+	</p>
+	<form action="http://127.0.0.1:8000/listar-sujetos/">
+		<input type="submit" value="Volver" />
+	</form>
+			
+	<ul class="form-style-1">
+		<br>
+		{% for resultado in resultados %}
+			<li>{{ resultado.sujeto }}, {{ resultado.resultados }}</li>
+			<hr>
+		{% endfor %}
+	</ul>
+
+</div>
+	
+
+	
+</body>
+</html>
