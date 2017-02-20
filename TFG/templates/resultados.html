@@ -1,44 +1,135 @@
 ﻿<html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="/interfaz.css">
+<style type="text/css">.form-style-1 { margin:10px auto; max-width: 400px; padding: 20px 12px 10px 20px; font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;}.form-style-1 li { padding: 0; display: block; list-style: none; margin: 10px 0 0 0;}.form-style-1 label{ margin:0 0 3px 0; padding:0px; display:block; font-weight: bold;}.form-style-1 input[type=text], .form-style-1 input[type=date],.form-style-1 input[type=datetime],.form-style-1 input[type=number],.form-style-1 input[type=search],.form-style-1 input[type=time],.form-style-1 input[type=url],.form-style-1 input[type=email],textarea, select{ box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; border:1px solid #BEBEBE; padding: 7px; margin:0px; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; outline: none; }.form-style-1 input[type=text]:focus, .form-style-1 input[type=date]:focus,.form-style-1 input[type=datetime]:focus,.form-style-1 input[type=number]:focus,.form-style-1 input[type=search]:focus,.form-style-1 input[type=time]:focus,.form-style-1 input[type=url]:focus,.form-style-1 input[type=email]:focus,.form-style-1 textarea:focus, .form-style-1 select:focus{ -moz-box-shadow: 0 0 8px #88D5E9; -webkit-box-shadow: 0 0 8px #88D5E9; box-shadow: 0 0 8px #88D5E9; border: 1px solid #88D5E9;}.form-style-1 .field-divided{ width: 49%;}.form-style-1 .field-long{ width: 100%;}.form-style-1 .field-select{ width: 100%;}.form-style-1 .field-textarea{ height: 100px;}.form-style-1 input[type=submit], .form-style-1 input[type=button]{ background: #4B99AD; padding: 8px 15px 8px 15px; border: none; color: #fff;}.form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{ background: #4691A4; box-shadow:none; -moz-box-shadow:none; -webkit-box-shadow:none;}.form-style-1 .required{ color:red;}</style>
+<!-- amCharts javascript sources -->
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+
+
+		
 </head>
+
 
 <body>
 
 
 <div class="form-style-1">
-	<h1>Interfaz del evaluador</h1>
+	<h1>Interfaz para el profesional</h1>
 </div>
 
 
 
 <div class="form-style-1">
-<!--
-	<button onclick="myFunction()">Click me</button>	
--->	
+
 	<h2>Informe de rendimiento del sujeto</h2>
 	<p>El siguiente informe muestra el rendimiento del sujeto
 	a través de las diferentes sesiones, ya sean de evaluación
-	o de tratamiento. <b>(TO-DO: Aquí mostramos el gráfico de progreso
-	del sujeto. Por ahora solo listamos los registros de resultados de ese
-	sujeto)</b>
+	o de tratamiento. Debajo del gráfico de rendimiento se encuentra
+	el listado de las sesiones en detalle.
 	</p>
-	<form action="http://127.0.0.1:8000/listar-sujetos/">
+	
+	<form action="{{ server_url }}/listar-sujetos/">
 		<input type="submit" value="Volver" />
 	</form>
-			
-	<ul class="form-style-1">
-		<br>
-		{% for resultado in resultados %}
-			<li>{{ resultado.sujeto }}, {{ resultado.resultados }}</li>
-			<hr>
-		{% endfor %}
-	</ul>
-
+		
+		
 </div>
-	
 
+<div id="chartdiv" style="width: 900px; height: 400px; margin:0 auto; background-color: #FFFFFF;" ></div>
+
+
+<br>
+
+<table style="text-align: center;width: 700px;font: 13px 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;margin:0 auto;">
+  <tr>    
+	<th>Evaluacion</th> 
+	<th>Fecha</th> 
+    <th>% Acierto</th> 
+    <th>Tiempo empleado</th>
+  </tr>  		
+	{% for resultado in resultados %}
+		<tr>
+			<td>{{ resultado.es_evaluacion }}</td>
+			<td>{{ resultado.fecha }}</td>
+			<td>{{ resultado.porcentaje_acierto }}</td>
+			<td>{{ resultado.tiempo_empleado }}</td>
+		</tr>
+	{% endfor %}
+</table>
+
+
+<br>
+	
+	
+<script>
+
+	// obtenemos desde la variable de django
+	// una lista con todos los porcentajes de acierto.
+	// En principio llegan ya ordenados por el filtro de django
+	
+	dataprovider = [
+		{% for resultado in resultados %}
+		{
+			"porcentaje": {{ resultado.porcentaje_acierto }},
+			"sesion": "{{resultado.fecha.day}}-{{resultado.fecha.month}}-{{resultado.fecha.year}}\n{{ resultado.fecha.hour}}:{{resultado.fecha.minute }}",
+			"color": "{{resultado.es_evaluacion}}" == "True" ? "#ff0066" : "#4c90b1", 
+			"etiqueta": "{{resultado.es_evaluacion}}" == "True" ? "Evaluación" : "", 
+			"marcador": "{{resultado.es_evaluacion}}" == "True" ? "20" : "10"
+		},
+		
+		
+		
+		{% endfor %}	
+	];
+	
+</script>
+
+<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "sesion",
+					"sequencedAnimation": false,
+					"categoryAxis": {
+						"gridPosition": "start",
+						"title":"Sesiones"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[value]]",
+							"bullet": "round",							
+							"bulletSizeField": "marcador",
+							"id": "AmGraph-1",
+							"title": "graph 1",
+							"valueField": "porcentaje",
+							"colorField": "color",
+							"labelText": "[[etiqueta]]"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "Porcentaje de acierto"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},					
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Progreso del rendimiento de {{ sujeto }}"
+						}
+					],
+					"dataProvider": dataprovider
+				}
+			);
+		</script>
+		
 	
 </body>
 </html>

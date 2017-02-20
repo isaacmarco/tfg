@@ -22,6 +22,7 @@ LOGIN_REDIRECT_URL = "/interfaz"
 LOGIN_URL = '/'
 LOGOUT_URL = 'mysite_logout'
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -31,7 +32,7 @@ SECRET_KEY = 'k+%)27dx-j2%@ks)tfh&kxaoosjbkc_3uw=%901!72gh(ys8gn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://venus-iv8wr84q.cloudapp.net']
 
 
 # Application definition

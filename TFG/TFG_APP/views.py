@@ -2,15 +2,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from TFG_APP.models import Resultado, EvaluadoresSujetos
+from TFG_APP.models import Resultado, EvaluadoresSujetos, Plan
 from django.contrib.auth.decorators import login_required
 
-# @login_required() <- esta clasusula se puede poner en todas las funciones!
+server_url = 'http://127.0.0.1:8000'
 
 # intefaz para los evaluadores
 @login_required
-def interfaz(request):
-    return render(request, 'interfaz.html')
+def interfaz(request):  
+    return render(request, 'interfaz.html',
+                  {'server_url':server_url})
+
+
 
 # listar los resultados de un sujeto
 @login_required
@@ -31,12 +34,25 @@ def listar_resultados(request):
     except ObjectDoesNotExist:
         return render(request, 'error.html', {'error': "id no existe en la base de datos"})
 
-    # buscamos los resultados de ese sujeto
+    # buscamos los resultados de ese sujeto y los recuperamos
+    # ordenados
     try:
+        Resultado.objects.order_by("fecha") # se usa - para orden inverseo
         resultados = Resultado.objects.filter(sujeto=sujeto_evaluado)
-        return render(request, 'resultados.html', {'resultados': resultados})
+        return render(request, 'resultados.html',
+                      {'resultados': resultados,
+                       'sujeto': sujeto_evaluado.username,
+                       'server_url':server_url}
+                      )
     except ObjectDoesNotExist:
         return render(request, 'error.html', {'error':"No hay resultados"})
+
+
+
+# generar un plan en base a los resultados
+# que acaba de recibir la funcion 'recibir_resultado'
+# def generar_plan(resultados):
+    
     
 
 # recibir un resultado por un sujeto
@@ -45,7 +61,11 @@ def recibir_resultado(request):
     # obtenemos los parametros desde la ULR
     nombre = request.GET['nombre']
     clave = request.GET['password']
+    es_evaluacion = request.GET['es_evaluacion']
+    tiempo_empleado = request.GET['tiempo_empleado']
+    porcentaje_acierto = request.GET['porcentaje_acierto']
     resultado = request.GET['resultado']
+    
     
     # hacemos login en la plataforma con los datos para
     # ver si la peticion tiene autorizacion para introducir los datos
@@ -58,11 +78,17 @@ def recibir_resultado(request):
                 sujeto=usuario,
                 nombre_sujeto=nombre,
                 id_sujeto=usuario.id,
-                resultados=resultado)
+                es_evaluacion=es_evaluacion,
+                tiempo_empleado=tiempo_empleado,
+                porcentaje_acierto=porcentaje_acierto,
+                resultados=resultado
+                )
             objeto_resultado.save()            
             return render(request, 'exito.html')
     else:        
         return render(request, 'error.html', {'error': "Error de autenticacion"})
+
+
     
 
 # listar los sujetos de un evaluador
@@ -74,12 +100,16 @@ def listar_sujetos(request):
     try:
         registros = EvaluadoresSujetos.objects.filter(usuario_propietario=request.user)                   
         return render(request,
-                      'sujetos.html', {'sujetos': registros})
+                      'sujetos.html',
+                      {'sujetos': registros,
+                      'server_url':server_url})
     except ObjectDoesNotExist:
         return render(request,
                       'error.html', {'error': "No tiene asignados sujetos"})        
        
-    
+
+
+
 
 # crear un sujeto
 @login_required
@@ -105,9 +135,14 @@ def nuevo_sujeto(request):
             nombre_sujeto=nombre,
             nombre_evaluador=request.user.username)
         registro.save()
+
+        # a continuacion creamos un plan para este nuevo
+        # sujeto. Todos los valores pueden estar por defecto
+        # en este nuevo plan, porque se actualizara con la
+        # primera evaluacion a la que se someta el sujeto 
+        plan = Plan(sujeto=nuevo_sujeto)
+        plan.save()
         
         return render(request, 'informacion.html', {'informacion': "Operacion completada"})
-
-    else:
-        
+    else:        
         return render(request, 'error.html', {'error': "El usuario ya existe"})
