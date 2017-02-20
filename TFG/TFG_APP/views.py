@@ -5,7 +5,7 @@ from django.shortcuts import render
 from TFG_APP.models import Resultado, EvaluadoresSujetos, Plan
 from django.contrib.auth.decorators import login_required
 
-server_url = 'http://venus-iv8wr84q.cloudapp.net:8000'
+server_url = ''
 
 
 
