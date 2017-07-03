@@ -1,0 +1,136 @@
+﻿<html>
+
+<head>
+<style type="text/css">.form-style-1 { margin:10px auto; max-width: 400px; padding: 20px 12px 10px 20px; font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;}.form-style-1 li { padding: 0; display: block; list-style: none; margin: 10px 0 0 0;}.form-style-1 label{ margin:0 0 3px 0; padding:0px; display:block; font-weight: bold;}.form-style-1 input[type=text], .form-style-1 input[type=date],.form-style-1 input[type=datetime],.form-style-1 input[type=number],.form-style-1 input[type=search],.form-style-1 input[type=time],.form-style-1 input[type=url],.form-style-1 input[type=email],textarea, select{ box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; border:1px solid #BEBEBE; padding: 7px; margin:0px; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; outline: none; }.form-style-1 input[type=text]:focus, .form-style-1 input[type=date]:focus,.form-style-1 input[type=datetime]:focus,.form-style-1 input[type=number]:focus,.form-style-1 input[type=search]:focus,.form-style-1 input[type=time]:focus,.form-style-1 input[type=url]:focus,.form-style-1 input[type=email]:focus,.form-style-1 textarea:focus, .form-style-1 select:focus{ -moz-box-shadow: 0 0 8px #88D5E9; -webkit-box-shadow: 0 0 8px #88D5E9; box-shadow: 0 0 8px #88D5E9; border: 1px solid #88D5E9;}.form-style-1 .field-divided{ width: 49%;}.form-style-1 .field-long{ width: 100%;}.form-style-1 .field-select{ width: 100%;}.form-style-1 .field-textarea{ height: 100px;}.form-style-1 input[type=submit], .form-style-1 input[type=button]{ background: #00533e; padding: 8px 15px 8px 15px; border: none; color: #fff;}.form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{ background: #4691A4; box-shadow:none; -moz-box-shadow:none; -webkit-box-shadow:none;}.form-style-1 .required{ color:red;}</style>
+</head>
+
+
+<body>
+
+
+<div class="form-style-1">
+	<h1>Interfaz para el profesional</h1>
+</div>
+
+
+
+<div class="form-style-1">
+
+	<h2>Plan de intervención actual</h2>
+	<p>La siguiente tabla muestra la información
+	sobre el plan de intervención que actualmente está siguiendo
+	el niño o la niña. 
+	</p>
+	
+	<form action="{{ server_url }}/listar-sujetos/">
+		<input type="submit" value="Volver" />
+	</form>
+		
+		
+</div>
+
+
+<br>
+
+<style>
+table {
+    border-collapse: collapse;
+	text-align: center;
+    width: 700px;
+	margin:0 auto;
+	font: 13px 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
+
+
+<table>
+
+  <tr>    
+	<th>Niño/niña</th>
+	<th>Evaluar en la próxima sesión</th> 	
+	<th>Rendimiento</th> 	
+	<th>Puntuacion</th> 	
+    <th>Número de sesiones del plan</th> 
+    <th>Sesiones completadas por el niño/niña</th>
+	<th>Magnitud</th> 		
+	<th>Tiempo entre items</th> 	
+	<th>Tiempo límite para el item</th> 		
+	<th>Usar tareas de apoyo</th>
+  </tr>  			
+		<tr>
+			<td>{{ sujeto }}</td>
+			<td>{{ plan.evaluar }}</td>		
+			<td>{{ plan.rendimiento }}</td>
+			<td>{{ plan.ponderacion }}</td>
+			<td>{{ plan.numero_sesiones }}</td>
+			<td>{{ plan.sesiones_completadas }}</td>			
+			<td>{{ plan.magnitud_item }}</td>			
+			<td>{{ plan.tiempo_entre_items }}</td>			
+			<td>{{ plan.tiempo_limite_item }}</td>	
+			<td>{{ plan.usar_tareas_apoyo }}</td>				
+		</tr>	
+		
+</table>
+
+
+<br>
+
+<div class="form-style-1">
+	<h2>Descripción de los campos del plan</h2>	
+</div>
+
+<table>
+  <tr>    
+	<th>Campo</th> 
+	<th>Descripción</th>     
+  </tr>  			
+	<tr>
+		<td>Evaluar</td>
+		<td>Indica si en la siguiente sesión el niño/niña será evaluado</td>
+	</tr>	
+	<tr>
+		<td>Rendimiento</td>
+		<td>El nivel de rendimiento del niño</td>
+	</tr>	
+	<tr>
+		<td>Puntuacion</td>
+		<td>Puntuación numéricas en la evaluación</td>
+	</tr>	
+	<tr>
+		<td>Número de sesiones del plan</td>
+		<td>Número de sesiones de intervención que debe realizar el niño/niña
+		antes de completar el plan y volver a ser evaluado</td>
+	</tr>	
+	<tr>
+		<td>Sesiones completadas por el niño/niña</td>
+		<td>Número de sesiones que el niño/niña ya ha realizado del plan actual</td>
+	</tr>	
+	<tr>
+		<td>Magnitud</td>
+		<td>Magnitud de los números para los ítems de intervención</td>
+	</tr>	
+	<tr>
+		<td>Tiempo entre ítems</td>
+		<td>Tiempo que transcurre entre ítem e ítem durante la intervención</td>
+	</tr>	
+	<tr>
+		<td>Tiempo límite</td>
+		<td>Tiempo máximo que se le da al niño para contestar el ítem durante la intervención</td>
+	</tr>	
+	<tr>
+		<td>Tareas apoyo</td>
+		<td>Usar tareas de apoyo en la intervención</td>
+	</tr>
+	
+</table>
+
+	
+</body>
+</html>

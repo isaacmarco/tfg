@@ -1,13 +1,11 @@
 ﻿<html>
 
 <head>
-<style type="text/css">.form-style-1 { margin:10px auto; max-width: 400px; padding: 20px 12px 10px 20px; font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;}.form-style-1 li { padding: 0; display: block; list-style: none; margin: 10px 0 0 0;}.form-style-1 label{ margin:0 0 3px 0; padding:0px; display:block; font-weight: bold;}.form-style-1 input[type=text], .form-style-1 input[type=date],.form-style-1 input[type=datetime],.form-style-1 input[type=number],.form-style-1 input[type=search],.form-style-1 input[type=time],.form-style-1 input[type=url],.form-style-1 input[type=email],textarea, select{ box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; border:1px solid #BEBEBE; padding: 7px; margin:0px; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; outline: none; }.form-style-1 input[type=text]:focus, .form-style-1 input[type=date]:focus,.form-style-1 input[type=datetime]:focus,.form-style-1 input[type=number]:focus,.form-style-1 input[type=search]:focus,.form-style-1 input[type=time]:focus,.form-style-1 input[type=url]:focus,.form-style-1 input[type=email]:focus,.form-style-1 textarea:focus, .form-style-1 select:focus{ -moz-box-shadow: 0 0 8px #88D5E9; -webkit-box-shadow: 0 0 8px #88D5E9; box-shadow: 0 0 8px #88D5E9; border: 1px solid #88D5E9;}.form-style-1 .field-divided{ width: 49%;}.form-style-1 .field-long{ width: 100%;}.form-style-1 .field-select{ width: 100%;}.form-style-1 .field-textarea{ height: 100px;}.form-style-1 input[type=submit], .form-style-1 input[type=button]{ background: #4B99AD; padding: 8px 15px 8px 15px; border: none; color: #fff;}.form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{ background: #4691A4; box-shadow:none; -moz-box-shadow:none; -webkit-box-shadow:none;}.form-style-1 .required{ color:red;}</style>
-<!-- amCharts javascript sources -->
+<style type="text/css">.form-style-1 { margin:10px auto; max-width: 400px; padding: 20px 12px 10px 20px; font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;}.form-style-1 li { padding: 0; display: block; list-style: none; margin: 10px 0 0 0;}.form-style-1 label{ margin:0 0 3px 0; padding:0px; display:block; font-weight: bold;}.form-style-1 input[type=text], .form-style-1 input[type=date],.form-style-1 input[type=datetime],.form-style-1 input[type=number],.form-style-1 input[type=search],.form-style-1 input[type=time],.form-style-1 input[type=url],.form-style-1 input[type=email],textarea, select{ box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; border:1px solid #BEBEBE; padding: 7px; margin:0px; -webkit-transition: all 0.30s ease-in-out; -moz-transition: all 0.30s ease-in-out; -ms-transition: all 0.30s ease-in-out; -o-transition: all 0.30s ease-in-out; outline: none; }.form-style-1 input[type=text]:focus, .form-style-1 input[type=date]:focus,.form-style-1 input[type=datetime]:focus,.form-style-1 input[type=number]:focus,.form-style-1 input[type=search]:focus,.form-style-1 input[type=time]:focus,.form-style-1 input[type=url]:focus,.form-style-1 input[type=email]:focus,.form-style-1 textarea:focus, .form-style-1 select:focus{ -moz-box-shadow: 0 0 8px #88D5E9; -webkit-box-shadow: 0 0 8px #88D5E9; box-shadow: 0 0 8px #88D5E9; border: 1px solid #88D5E9;}.form-style-1 .field-divided{ width: 49%;}.form-style-1 .field-long{ width: 100%;}.form-style-1 .field-select{ width: 100%;}.form-style-1 .field-textarea{ height: 100px;}.form-style-1 input[type=submit], .form-style-1 input[type=button]{ background: #00533e; padding: 8px 15px 8px 15px; border: none; color: #fff;}.form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{ background: #4691A4; box-shadow:none; -moz-box-shadow:none; -webkit-box-shadow:none;}.form-style-1 .required{ color:red;}</style>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script> 
 
 
-		
 </head>
 
 
@@ -22,8 +20,8 @@
 
 <div class="form-style-1">
 
-	<h2>Informe de rendimiento del sujeto</h2>
-	<p>El siguiente informe muestra el rendimiento del sujeto
+	<h2>Informe de rendimiento del niño/niña</h2>
+	<p>El siguiente informe muestra el rendimiento del niño/niña
 	a través de las diferentes sesiones, ya sean de evaluación
 	o de tratamiento. Debajo del gráfico de rendimiento se encuentra
 	el listado de las sesiones en detalle.
@@ -31,35 +29,61 @@
 	
 	<form action="{{ server_url }}/listar-sujetos/">
 		<input type="submit" value="Volver" />
-	</form>
-		
+	</form>		
 		
 </div>
 
-<div id="chartdiv" style="width: 900px; height: 400px; margin:0 auto; background-color: #FFFFFF;" ></div>
+
+<div id="grafico-rendimiento" style="width: 900px; height: 400px; margin:0 auto; background-color: #FFFFFF;" ></div>
+<br><br>
+<div id="grafico-aciertos" style="width: 900px; height: 400px; margin:0 auto; background-color: #FFFFFF;" ></div>
+<br><br>
+<div id="grafico-tiempo" style="width: 900px; height: 400px; margin:0 auto; background-color: #FFFFFF;" ></div>
+<br><br>
 
 
-<br>
+<style>
+table {
+    border-collapse: collapse;
+	text-align: center;
+    width: 700px;
+	margin:0 auto;
+	font: 13px 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
 
-<table style="text-align: center;width: 700px;font: 13px 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;margin:0 auto;">
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
+
+
+<table>
   <tr>    
 	<th>Evaluacion</th> 
 	<th>Fecha</th> 
+	<th>Puntuacion</th>	
+	<th>Tiempo medio item</th>
     <th>% Acierto</th> 
-    <th>Tiempo empleado</th>
+    <th>% Contestado</th>
   </tr>  		
 	{% for resultado in resultados %}
 		<tr>
 			<td>{{ resultado.es_evaluacion }}</td>
 			<td>{{ resultado.fecha }}</td>
-			<td>{{ resultado.porcentaje_acierto }}</td>
+			<td>{{ resultado.ponderacion }}</td>
 			<td>{{ resultado.tiempo_empleado }}</td>
+			<td>{{ resultado.porcentaje_acierto }}</td>
+			<td>{{ resultado.porcentaje_contestado }}</td>
 		</tr>
 	{% endfor %}
 </table>
 
 
 <br>
+
 	
 	
 <script>
@@ -72,48 +96,68 @@
 		{% for resultado in resultados %}
 		{
 			"porcentaje": {{ resultado.porcentaje_acierto }},
-			"sesion": "{{resultado.fecha.day}}-{{resultado.fecha.month}}-{{resultado.fecha.year}}\n{{ resultado.fecha.hour}}:{{resultado.fecha.minute }}",
+			"puntuacion": {{ resultado.ponderacion }},
+			"contestado": {{ resultado.porcentaje_contestado }},
+			"tiempo": {{ resultado.tiempo_empleado }},
+			"sesion": "{{resultado.fecha.day}} del {{resultado.fecha.month}}\n{{resultado.fecha.hour}}:{{resultado.fecha.minute}}",
 			"color": "{{resultado.es_evaluacion}}" == "True" ? "#ff0066" : "#4c90b1", 
-			"etiqueta": "{{resultado.es_evaluacion}}" == "True" ? "Evaluación" : "", 
-			"marcador": "{{resultado.es_evaluacion}}" == "True" ? "20" : "10"
+			"etiqueta": "{{resultado.es_evaluacion}}" == "True" ? "" : "", 
+			"marcador": "{{resultado.es_evaluacion}}" == "True" ? "20" : "10",	
+			"total": "100"
 		},
-		
-		
 		
 		{% endfor %}	
 	];
 	
+	
+	
+	
+
 </script>
 
-<!-- amCharts javascript code -->
+	
+</script>
 		<script type="text/javascript">
-			AmCharts.makeChart("chartdiv",
+			AmCharts.makeChart("grafico-rendimiento",
 				{
 					"type": "serial",
 					"categoryField": "sesion",
 					"sequencedAnimation": false,
 					"categoryAxis": {
 						"gridPosition": "start",
-						"title":"Sesiones"
+						"labelRotation": 90,
+						"labelOffset": 10						
 					},
 					"trendLines": [],
-					"graphs": [
+					"graphs": [					
+						{			
+							// total
+							"id": "AmGraph-3",
+							"fillAlphas": 0.1,
+							"title": "graph 1",
+							"valueField": "total",
+							"clustered":false,
+							"type":"column",
+							"colorField": "color"
+						},						
 						{
 							"balloonText": "[[value]]",
-							"bullet": "round",							
-							"bulletSizeField": "marcador",
 							"id": "AmGraph-1",
+							"fillAlphas": 0.9,
 							"title": "graph 1",
-							"valueField": "porcentaje",
-							"colorField": "color",
-							"labelText": "[[etiqueta]]"
-						}
+							"valueField": "puntuacion",
+							"labelText": "[[etiqueta]]",
+							"clustered":false,
+							"type":"column",
+							"colorField": "color"
+						}						
 					],
 					"guides": [],
 					"valueAxes": [
 						{
 							"id": "ValueAxis-1",
-							"title": "Porcentaje de acierto"
+							"fontSize": 0,
+							"title": "Puntuación"
 						}
 					],
 					"allLabels": [],
@@ -122,14 +166,137 @@
 						{
 							"id": "Title-1",
 							"size": 15,
-							"text": "Progreso del rendimiento de {{ sujeto }}"
+							"text": "Puntuación en las pruebas de {{ sujeto }}"
 						}
 					],
 					"dataProvider": dataprovider
 				}
 			);
-		</script>
-		
+</script>
+
+
 	
+</script>
+		<script type="text/javascript">
+			AmCharts.makeChart("grafico-aciertos",
+				{
+					"type": "serial",
+					"categoryField": "sesion",
+					"sequencedAnimation": false,
+					"categoryAxis": {
+						"gridPosition": "start",
+						"labelRotation": 90,
+						"labelOffset": 10						
+					},
+					"trendLines": [],
+					"graphs": [					
+						{						
+							"id": "AmGraph-3",
+							"balloonText": "[[value]]%",
+							"fillAlphas": 0.1,
+							"title": "graph 1",
+							"valueField": "total",
+							"clustered":false,
+							"type":"column",
+							"colorField": "color",
+							"lineColor": "#000000"
+						},
+						{
+							"balloonText": "[[value]]% contestados",
+							"id": "AmGraph-2",
+							"fillAlphas": 0.5,
+							"title": "graph 2",
+							"valueField": "contestado",
+							"labelText": "[[etiqueta]]",
+							"clustered":false,
+							"type":"column"
+						},
+						{
+							"balloonText": "[[value]]% acertados",
+							"id": "AmGraph-1",
+							"fillAlphas": 0.9,
+							"title": "graph 1",
+							"valueField": "porcentaje",
+							"labelText": "[[etiqueta]]",
+							"clustered":false,
+							"type":"column"
+						}						
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"fontSize": 0,
+							"title": "Aciertos - Contestados"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},					
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Progreso en ítems acertados / contestados de {{ sujeto }}"
+						}
+					],
+					"dataProvider": dataprovider
+				}
+			);
+</script>
+
+	
+</script>
+		<script type="text/javascript">
+			AmCharts.makeChart("grafico-tiempo",
+				{
+					"type": "serial",
+					"categoryField": "sesion",
+					"sequencedAnimation": false,
+					"categoryAxis": {
+						"gridPosition": "start",
+						"labelRotation": 90,
+						"labelOffset": 10						
+					},
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [						
+						{
+							"balloonText": "[[value]] segundos",
+							"id": "AmGraph-1",
+							"fillAlphas": 0.3,
+							"title": "graph 1",
+							"valueField": "tiempo",
+							"labelText": "[[etiqueta]]",
+							"clustered":false,
+							"type":"column",
+							//"fillColors": "#2747D4",
+							"colorField": "color",
+							"lineColor": "#000000"
+						}						
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"fontSize": 10,
+							"title": "Tiempo medio invertido por item"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},					
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Tiempo medio por item en la intervención de {{ sujeto }}"
+						}
+					],
+					"dataProvider": dataprovider
+				}
+			);
+</script>
+
 </body>
 </html>

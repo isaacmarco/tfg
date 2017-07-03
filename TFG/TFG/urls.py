@@ -14,15 +14,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from TFG_APP.views import nuevo_sujeto, listar_sujetos, recibir_resultado,listar_resultados, interfaz
-urlpatterns = [
+from TFG_APP.views import nuevo_sujeto, listar_sujetos, recibir_resultado,listar_resultados
+from TFG_APP.views import nueva_interfaz, enviar_plan, ver_plan
+
+urlpatterns = [    
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout'),
-    url(r'^interfaz/$', interfaz),
+    url(r'^interfaz/$', nueva_interfaz),    
     url(r'^nuevo-sujeto/$', nuevo_sujeto),
+    url(r'^enviar-plan/$', enviar_plan),
+    url(r'^ver-plan/$', ver_plan),
     url(r'^listar-sujetos/$', listar_sujetos),
     url(r'^recibir-resultado/$', recibir_resultado),
-    url(r'^listar-resultados/$', listar_resultados)
-    #url(r'^nuevo-sujeto/(\D+)/(\D+)/(\D+)/$', nuevo_sujeto),
+    url(r'^listar-resultados/$', listar_resultados),
+    url(r'^$', 'django.contrib.auth.views.login')
 ]
